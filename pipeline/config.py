@@ -51,5 +51,12 @@ class PipelineConfig:
     graph: GraphConfig = field(default_factory=GraphConfig)
     routing: RoutingConfig = field(default_factory=RoutingConfig)
     paths: PathsConfig = field(default_factory=PathsConfig)
+    # Evaluation config to control sampling and time tolerances
+    @dataclass
+    class EvalConfig:
+        max_test_orders: int = 1000
+        time_tolerance_hours: int = 3
+
+    evaluation: 'PipelineConfig.EvalConfig' = field(default_factory=lambda: PipelineConfig.EvalConfig())
 
 

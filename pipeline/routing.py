@@ -47,6 +47,7 @@ class CircularRoute:
         # next load window in current
         cur['load_start_time'] = cur['unloading_end_time'] + timedelta(hours=self.stopover_hours) if cur['unloading_end_time'] else cur['load_start_time']
         cur['load_end_time'] = cur['load_start_time'] + timedelta(hours=self.unloading_hours)
+        departure_time = cur['load_start_time']
         arrival = cur['load_end_time'] + timedelta(hours=edge_data['avg_time'][travel_group])
         if to_city not in self.nodes:
             self.nodes[to_city] = {
@@ -62,7 +63,9 @@ class CircularRoute:
             'step_price': edge_data['avg_price'][travel_group],
             'step_distance': edge_data['median_distance'][travel_group],
             'step_frequency': edge_data['weekday_frequencies'][travel_group][cur['load_start_time'].weekday()],
-            'step_top_customers': edge_data['top_customers'][travel_group]
+            'step_top_customers': edge_data['top_customers'][travel_group],
+            'departure_time': departure_time,
+            'travel_group': travel_group
         }))
 
     def remove_last(self):

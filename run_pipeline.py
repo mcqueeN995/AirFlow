@@ -14,7 +14,7 @@ from pipeline.clustering import cluster_coordinates
 from pipeline.graph import build_graph
 from pipeline.routing import find_routes, find_routes_baseline
 from pipeline.exporter import export_graph_edges, export_routes, ensure_dir, export_orders_with_clusters
-from pipeline.eval import compare_baseline_vs_improved
+from pipeline.eval import compare_baseline_vs_improved, compute_metrics
 
 
 app = typer.Typer(help="Circular routes discovery pipeline")
@@ -144,6 +144,14 @@ def run(cfg: str = typer.Option(None, help="Path to config.yaml")):
     export_orders_with_clusters(pd.concat([train, test], axis=0, ignore_index=True), config.paths.output_dir)
     cmp = compare_baseline_vs_improved(baseline_by_order, routes_by_order)
     print(cmp)
+    # Compute extended metrics on improved routes
+    metrics = compute_metrics(test, routes_by_order,
+                              start_cluster_col='start_cluster', end_cluster_col='end_cluster',
+                              start_dt_col='first_point_date_time_start',
+                              time_tolerance_hours=3)
+    print({'metrics': metrics})
+    # Save metrics
+    pd.DataFrame([metrics]).to_csv(os.path.join(config.paths.output_dir, 'metrics.csv'), index=False)
     print("Done.")
 
 
