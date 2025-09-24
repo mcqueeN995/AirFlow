@@ -1,0 +1,31 @@
+clustering:
+  method: dbscan
+  radius_km: 75.0
+  min_cluster_size: 5
+  min_samples: 3
+  diameter_guard_km: 75.0
+
+split:
+  holdout_days: 30
+  gap_days: 3
+
+graph:
+  include_weekday_hour: true
+  price_trend_days: 28
+  top_customers_count: 3
+
+routing:
+  max_duration_days: 5
+  max_routes: 5
+  stopover_hours: 8
+  unloading_hours: 6
+  min_edge_weekday_freq: 0.2
+  revenue_per_day_min: 20000
+  revenue_per_km_min: 40
+  min_hourly_prob: 0.01
+
+paths:
+  input_csv: /home/shotnik/Air/AirFlow/orders_source.csv
+  output_dir: /home/shotnik/Air/AirFlow/output
+
+

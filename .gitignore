@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.dylib
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+profile_default/
+.ipython/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE/editor
+.vscode/
+.idea/
+
+# Logs
+*.log
+logs/
+output/streamlit.log
+
+# Local env and secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Project data & artifacts
+output/
+orders_source.csv
+
+# Caches
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.cache/
+
+# Streamlit local state
+.streamlit/
+
+
